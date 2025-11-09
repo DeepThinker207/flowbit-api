@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: flowbit_db
+    restart: always
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: flowbit
+    ports:
+      - "5432:5432"
+    volumes:
+      - flowbit-monorepo_pgdata:/var/lib/postgresql/data
+
+volumes:
+  flowbit-monorepo_pgdata:
