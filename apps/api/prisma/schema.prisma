@@ -7,9 +7,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
+model Vendor {
+  id        Int       @id @default(autoincrement())
+  vendorId  String     @unique
   name      String
-  email     String   @unique
-  createdAt DateTime @default(now())
+  category  String?
+  invoices  Invoice[]
+}
+
+model Customer {
+  id          Int       @id @default(autoincrement())
+  customerId  String     @unique
+  name        String
+  invoices    Invoice[]
+}
+
+model Invoice {
+  id          Int        @id @default(autoincrement())
+  invoiceId   String     @unique
+  date        DateTime   // 👈 this fixes the 'date' issue
+  amount      Float
+  vendor      Vendor     @relation(fields: [vendorId], references: [id])
+  vendorId    Int
+  customer    Customer   @relation(fields: [customerId], references: [id])
+  customerId  Int
+  lineItems   LineItem[]
+  payment     Payment?
+}
+
+model LineItem {
+  id          Int       @id @default(autoincrement())
+  description String
+  quantity    Int
+  price       Float     
+  invoice     Invoice   @relation(fields: [invoiceId], references: [id])
+  invoiceId   Int
+}
+
+model Payment {
+  id          Int       @id @default(autoincrement())
+  paymentId   String    @unique
+  date        DateTime
+  amount      Float
+  status      String
+  invoice     Invoice   @relation(fields: [invoiceId], references: [id])
+  invoiceId   Int       @unique  
+}
+
+model Document {
+  id                  String   @id @default(uuid())
+  name                String
+  filePath            String
+  fileSize            BigInt
+  fileType            String
+  status              String
+  organizationId      String?
+  departmentId        String?
+  createdAt           DateTime?
+  updatedAt           DateTime?
+  isValidatedByHuman  Boolean?
+  uploadedById        String?
+  processedAt         DateTime?
+  analyticsId         String?
+  metadata            Json?
+  extractedData       Json?
+  validatedData       Json?
 }
