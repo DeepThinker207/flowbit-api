@@ -1,10 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 async function main() {
   console.log("Seeding basic vendor and invoice data...");
-
   // Vendors
   await prisma.vendor.createMany({
     data: [
@@ -13,7 +11,6 @@ async function main() {
       { vendorId: "V003", name: "GreenLogistics", category: "Transport" },
     ],
   });
-
   // Customer
   const customer = await prisma.customer.create({
     data: { customerId: "C001", name: "Flowbit Pvt. Ltd." },
@@ -37,7 +34,6 @@ async function main() {
       },
     },
   });
-
   // Invoice 2
   await prisma.invoice.create({
     data: {
@@ -56,10 +52,8 @@ async function main() {
       },
     },
   });
-
   console.log("Data seeded successfully!");
 }
-
 main()
   .catch(console.error)
   .finally(async () => await prisma.$disconnect());
