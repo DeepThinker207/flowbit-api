@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   const data = JSON.parse(fs.readFileSync("./data/Analytics_Test_Data.json", "utf-8"));
 
-  console.log("🚀 Starting document import...");
+  console.log("Starting document import...");
 
   for (const doc of data) {
     await prisma.document.upsert({
@@ -35,7 +35,7 @@ async function main() {
 
   }
 
-  console.log("✅ Document import complete!");
+  console.log("Document import complete!");
 }
 
 main()

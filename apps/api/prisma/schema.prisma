@@ -25,7 +25,7 @@ model Customer {
 model Invoice {
   id          Int        @id @default(autoincrement())
   invoiceId   String     @unique
-  date        DateTime   // 👈 this fixes the 'date' issue
+  date        DateTime   
   amount      Float
   vendor      Vendor     @relation(fields: [vendorId], references: [id])
   vendorId    Int
