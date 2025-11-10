@@ -3,10 +3,12 @@ import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 import statsRouter from "./routes/stats"; 
 import invoiceTrendsRouter from "./routes/invoiceTrends";
+import vendorsRouter from "./routes/vendors";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use("/vendors", vendorsRouter);
 
 const prisma = new PrismaClient();
 
@@ -40,7 +42,6 @@ app.post("/users", async (req, res) => {
   }
 });
 
-// Stats route (new for Phase 2)
 app.use("/stats", statsRouter);
 app.use("/invoice-trends", invoiceTrendsRouter);
 
