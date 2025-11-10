@@ -1,14 +1,26 @@
 # Flowbit API
-A simple backend built using Node.js, Express, Prisma ORM, and PostgreSQL (Dockerized).
+- Simple backend service built with Node.js, Express, Prisma ORM, and PostgreSQL (Dockerized) for Flowbit’s analytics dashboard assignment.
+
+- This API handles invoices, vendors, payments, and analytics routes like stats, category spend, invoice trends, and cash outflow.
 
 
 ## Features:
 - REST API built with Express
-- PostgreSQL database running in Docker
-- Prisma ORM for managing schema and queries
-- Endpoints for creating and fetching users
-- Environment-based configuration using .env
+- PostgreSQL via Docker
+- Prisma ORM setup & schema modeling
+- Seed scripts for inserting dummy data
+- Analytics endpoints for dashboard:
 
+- /stats
+
+- /invoice-trends
+
+- /category-spend
+
+- /cash-outflow
+✅ User routes (basic testing)
+✅ Modular route structure
+✅ Environment-based config using .env
 
 ## Tech Stack
 | Component        |        Technology                      |
@@ -18,6 +30,27 @@ A simple backend built using Node.js, Express, Prisma ORM, and PostgreSQL (Docke
 | Database         |        PostgreSQL (Docker)             |
 | ORM              |        Prisma                          |
 | Tools            |   Docker Compose, REST Client (VS Code)|
+
+## Folder Structure
+flowbit-monorepo/
+│
+├── apps/
+│   ├── api/
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma
+│   │   │   ├── seed.ts
+│   │   │   └── seedInvoices.ts
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   └── routes/
+│   │   │       ├── stats.ts
+│   │   │       ├── invoiceTrends.ts
+│   │   │       ├── categorySpend.ts
+│   │   │       └── cashOutflow.ts
+│   │   ├── package.json
+│   │   └── .env
+│
+└── docker-compose.yml
 
 
 ## Setup Instructions
@@ -34,80 +67,44 @@ A simple backend built using Node.js, Express, Prisma ORM, and PostgreSQL (Docke
   docker compose up -d db
   ```
 
-This will create a PostgreSQL database with the following details:
+3. Default DB credentials (from docker-compose.yml):
 - User: app
 - Password: app
 - Database: flowbit
 - Port: 5432
 
-3. Install Dependencies
-- Run this command to install all required Node.js packages:
-  ```bash
-  npm install
-  ```
+4. Install Dependencies
+```
+npm install
+```
 
-4. Push Prisma Schema to Database
-- Run this command to push the Prisma schema to the PostgreSQL database:
-  ```bash
-  npx prisma db push
-  ```
+5. Push Prisma Schema
+```
+npx prisma db push
+```
+. Run the Server
+```
+npm run dev
+```
 
-5. Start the Server
-- Run this command to start the backend server:
-  ```bash
-  npm run dev
-  ```
+6. Server will start on:
+```
+http://localhost:3001
+```
 
-- After running this command, the server will be available at:
-  http://localhost:3001
+## Optional Tools
+- To open the Prisma GUI:
+```
+npx prisma studio
+```
 
-
-
-## API Endpoints
-
-### Create a New User
-Run the following POST request:
-POST → http://localhost:3001/users
-
-
-### Body (JSON):
-{
-  "name": "Deepesh",
-  "email": "deepesh@example.com"
-}
-
-
-### Get All Users
-- Run the following GET request:
-GET → http://localhost:3001/users
-
-
-### Example Response:
-[
-  {
-    "id": 1,
-    "name": "Deepesh",
-    "email": "deepesh@example.com",
-    "createdAt": "2025-11-10T..."
-  }
-]
-
-
-
-### Open Prisma Studio (Optional)
-
-- Run this command to visually view and manage your database:
-  ```bash
-  npx prisma studio
-  ```
-
-
-- After running this command, open the following link in your browser:
+- This opens:
+```
 http://localhost:5555
+```
 
 
-- Stop Containers
-  After testing, run this command to stop and remove the Docker containers:
-  ```bash
-  docker compose down
-  ```
+# Notes:
+- The project currently includes backend APIs only.
+- Frontend (Next.js + Tailwind + shadcn/ui) and Vanna AI integration can be added in later phases.
+- This version focuses on API functionality and data correctness.
