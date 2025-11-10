@@ -12,7 +12,8 @@
   "db:pull": "prisma db pull --schema=./prisma/schema.prisma --env-file=./.env",
   "db:generate": "prisma generate --schema=./prisma/schema.prisma --env-file=./.env",
   "db:push": "prisma db push --schema=./prisma/schema.prisma --env-file=./.env",
-  "seed": "ts-node prisma/seed.ts"
+  "seed": "ts-node prisma/seed.ts",
+  "seed-invoices": "ts-node prisma/seedInvoices.ts"
 },
   "keywords": [],
   "author": "",

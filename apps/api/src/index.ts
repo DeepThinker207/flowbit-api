@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
+import statsRouter from "./routes/stats"; 
+import invoiceTrendsRouter from "./routes/invoiceTrends";
 
 const app = express();
 app.use(express.json());
@@ -8,12 +10,12 @@ app.use(cors());
 
 const prisma = new PrismaClient();
 
-// ✅ Default route
+// Default route
 app.get("/", (req, res) => {
   res.json({ message: "Flowbit API is running!" });
 });
 
-// ✅ Get all users
+// User routes
 app.get("/users", async (req, res) => {
   try {
     const users = await prisma.user.findMany();
@@ -24,7 +26,6 @@ app.get("/users", async (req, res) => {
   }
 });
 
-// ✅ Create a new user
 app.post("/users", async (req, res) => {
   const { name, email } = req.body;
 
@@ -39,5 +40,10 @@ app.post("/users", async (req, res) => {
   }
 });
 
+// Stats route (new for Phase 2)
+app.use("/stats", statsRouter);
+app.use("/invoice-trends", invoiceTrendsRouter);
+
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(` Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
