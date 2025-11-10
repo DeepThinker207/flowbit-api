@@ -6,6 +6,7 @@ import invoiceTrendsRouter from "./routes/invoiceTrends";
 import vendorsRouter from "./routes/vendors";
 import categorySpendRouter from "./routes/categorySpend";
 import topVendorsRouter from "./routes/topVendors";
+import cashOutflowRouter from "./routes/cashOutflow";
 
 const app = express();
 app.use(express.json());
@@ -13,6 +14,8 @@ app.use(cors());
 app.use("/vendors", vendorsRouter);
 app.use("/category-spend", categorySpendRouter);
 app.use("/vendors/top10", topVendorsRouter);
+app.use("/cash-outflow", cashOutflowRouter);
+
 const prisma = new PrismaClient();
 
 app.get("/", (req, res) => {
