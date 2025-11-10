@@ -1,20 +1,21 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Flowbit API service",
   "main": "index.js",
   "scripts": {
-  "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-  "build": "tsc -p .",
-  "start": "node dist/index.js",
-  "prisma:migrate": "prisma migrate dev",
-  "prisma:generate": "prisma generate",
-  "db:pull": "prisma db pull --schema=./prisma/schema.prisma --env-file=./.env",
-  "db:generate": "prisma generate --schema=./prisma/schema.prisma --env-file=./.env",
-  "db:push": "prisma db push --schema=./prisma/schema.prisma --env-file=./.env",
-  "seed": "ts-node prisma/seed.ts",
-  "seed-invoices": "ts-node prisma/seedInvoices.ts"
-},
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc -p .",
+    "start": "node dist/index.js",
+    "postinstall": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:generate": "prisma generate",
+    "db:pull": "prisma db pull --schema=./prisma/schema.prisma --env-file=./.env",
+    "db:generate": "prisma generate --schema=./prisma/schema.prisma --env-file=./.env",
+    "db:push": "prisma db push --schema=./prisma/schema.prisma --env-file=./.env",
+    "seed": "ts-node prisma/seed.ts",
+    "seed-invoices": "ts-node prisma/seedInvoices.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -31,8 +32,9 @@
     "dotenv": "^17.2.3",
     "prisma": "6.7.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.9.3",
-    "seed": "ts-node prisma/seed.ts"
-
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
