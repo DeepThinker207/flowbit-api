@@ -15,12 +15,13 @@ router.get("/", async (req, res) => {
       select: { id: true, category: true },
     });
 
-    const catSpend: any = {};
+    const catSpend: Record<string, number> = {};
 
     grouped.forEach((g) => {
       const v = vendors.find((x) => x.id === g.vendorId);
-      if (v) {
-        catSpend[v.category] = (catSpend[v.category] || 0) + (g._sum.amount || 0);
+      if (v?.category) {
+        catSpend[v.category] =
+          (catSpend[v.category] || 0) + (g._sum.amount || 0);
       }
     });
 

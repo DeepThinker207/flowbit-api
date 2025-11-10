@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
-import statsRouter from "./routes/stats"; 
+import statsRouter from "./routes/stats";
 import invoiceTrendsRouter from "./routes/invoiceTrends";
 import vendorsRouter from "./routes/vendors";
 import categorySpendRouter from "./routes/categorySpend";
@@ -9,14 +9,18 @@ import topVendorsRouter from "./routes/topVendors";
 import cashOutflowRouter from "./routes/cashOutflow";
 
 const app = express();
+const prisma = new PrismaClient();
+
 app.use(express.json());
 app.use(cors());
+
+// Routers
 app.use("/vendors", vendorsRouter);
 app.use("/category-spend", categorySpendRouter);
 app.use("/vendors/top10", topVendorsRouter);
 app.use("/cash-outflow", cashOutflowRouter);
-
-const prisma = new PrismaClient();
+app.use("/stats", statsRouter);
+app.use("/invoice-trends", invoiceTrendsRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Flowbit API is running!" });
@@ -31,6 +35,7 @@ app.get("/users", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch users" });
   }
 });
+
 app.post("/users", async (req, res) => {
   const { name, email } = req.body;
   try {
@@ -43,7 +48,6 @@ app.post("/users", async (req, res) => {
     res.status(500).json({ error: "Failed to create user" });
   }
 });
-app.use("/stats", statsRouter);
-app.use("/invoice-trends", invoiceTrendsRouter);
+
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
