@@ -31,26 +31,6 @@
 | ORM              |        Prisma                          |
 | Tools            |   Docker Compose, REST Client (VS Code)|
 
-## Folder Structure
-flowbit-monorepo/
-│
-├── apps/
-│   ├── api/
-│   │   ├── prisma/
-│   │   │   ├── schema.prisma
-│   │   │   ├── seed.ts
-│   │   │   └── seedInvoices.ts
-│   │   ├── src/
-│   │   │   ├── index.ts
-│   │   │   └── routes/
-│   │   │       ├── stats.ts
-│   │   │       ├── invoiceTrends.ts
-│   │   │       ├── categorySpend.ts
-│   │   │       └── cashOutflow.ts
-│   │   ├── package.json
-│   │   └── .env
-│
-└── docker-compose.yml
 
 
 ## Setup Instructions
