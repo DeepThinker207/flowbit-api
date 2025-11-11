@@ -18,9 +18,6 @@
 - /category-spend
 
 - /cash-outflow
-✅ User routes (basic testing)
-✅ Modular route structure
-✅ Environment-based config using .env
 
 ## Tech Stack
 | Component        |        Technology                      |
